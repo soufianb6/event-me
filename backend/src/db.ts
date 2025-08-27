@@ -1,10 +1,10 @@
-import Database from 'better-sqlite3';
+import Database, { type Database as DB } from 'better-sqlite3';
 import EVENTS from './data/events.json' with {type: 'json'};
 import USERS from './data/users.json' with {type: 'json'};
 import RSVPS from './data/rsvps.json' with {type: 'json'};
 
 
-const db = new Database('src/sqlite.db', { verbose: console.log });
+const db: DB = new Database('src/sqlite.db', { verbose: console.log });
 
 console.log(`Initializing database: ${db.name} `);
 

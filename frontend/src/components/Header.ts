@@ -1,6 +1,9 @@
-import { Theme as ThemeIcon } from './Icons';
+import { Theme } from './Icons.ts';
+
+type ThemeOption = 'light' | 'dark';
 
 const themeToggleId = 'theme';
+
 
 const Header = `
 <header>
@@ -9,7 +12,7 @@ const Header = `
         <p>All the events you never knew you needed to attend!</p>
     </hgroup>
     <a href="#" role="toggle" id="${themeToggleId}"  title="Toggle color scheme" >
-        ${ThemeIcon} 
+        ${Theme} 
     </a>
 </header>
 `;
@@ -17,14 +20,16 @@ const Header = `
 const toggleDarkMode = () => {
     const doc = document.documentElement;
     const currentTheme = doc.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
-        doc.setAttribute('data-theme', 'lite');
-    } else if (currentTheme === 'light') {
-        doc.setAttribute('data-theme', 'dark');
-    }
+    const nextTheme: ThemeOption = currentTheme === 'dark' ? 'light' : 'dark';
+    doc.setAttribute('data-theme', nextTheme);
 }
+
 export function setupThemeToggle() {
     const themeToggle = document.getElementById(themeToggleId);
+    if (!themeToggle) {
+        console.error('Missing theme toggle: no element with id', themeToggleId);
+        return;
+    }
     themeToggle.addEventListener('click', toggleDarkMode);
 
 }
