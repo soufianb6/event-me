@@ -5,7 +5,9 @@ All the events you never knew you needed to attend!
 
 ## Overview
 
-This is a simple full-stack web project for educational purposes, to demonstrate the functionality and value of moving from JS to TS gradually. 
+This is a simple full-stack web project for educational purposes, to demonstrate the functionality and value of moving from JS to TS gradually.
+
+It is part of Anjana's course [TypeScript First Steps](https://anjana.dev/typescript-first-steps) on [FrontendMasters](https://frontendmasters.com/teachers/anjana-vakil/).
 
 ## Installation
 
@@ -53,3 +55,9 @@ Open the app at `http://localhost:5173`.
 
 Leave the frontend running in this terminal.
 
+
+## Branches
+
+The [`main`](https://github.com/vakila/event-me/tree/solution) branch contains the starting point for the course exercises, which involve migrating from JS to TS and fixing the app's (intentional) bugs in the process.
+
+The [`solution`](https://github.com/vakila/event-me/tree/solution) branch contains a reference solution for the workshop exercises. But there is more than one way to type a script, so your solution might differ!
