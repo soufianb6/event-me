@@ -13,19 +13,22 @@ const Header = `
     </a>
 </header>
 `;
-
+type Theme = 'light' | 'dark';
 const toggleDarkMode = () => {
+    let  newTheme:Theme;
     const doc = document.documentElement;
     const currentTheme = doc.getAttribute('data-theme');
     if (currentTheme === 'dark') {
-        doc.setAttribute('data-theme', 'lite');
+        newTheme = 'light';
+        doc.setAttribute('data-theme', newTheme);
     } else if (currentTheme === 'light') {
-        doc.setAttribute('data-theme', 'dark');
+        newTheme = 'dark';
+        doc.setAttribute('data-theme', newTheme);
     }
 }
 export function setupThemeToggle() {
     const themeToggle = document.getElementById(themeToggleId);
-    themeToggle.addEventListener('click', toggleDarkMode);
+    themeToggle?.addEventListener('click', toggleDarkMode);
 
 }
 
