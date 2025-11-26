@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import usersRouter from './users.js';
-import eventsRouter from './events.js';
+import usersRouter from './users.ts';
+import eventsRouter from './events.ts';
 
 
 const router = Router();
