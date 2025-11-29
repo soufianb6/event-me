@@ -1,30 +1,31 @@
 import db from '../db.ts';
-import { Router } from 'express';
+import e, { Router } from 'express';
 import { getUser } from './users.ts';
+import type { Event, User, RSVP, Id } from '../types.ts';
 
 const router = Router();
 
-const joinHost = (event) => {
-  const host = getUser(event.host_id);
+const joinHost = (event:Event) => {
+  const host = getUser(event.host_id) as User;
   return { ...event, host };
 }
 
-const joinRSVPs = (event) => {
+const joinRSVPs = (event:Event) => {
   const { id } = event;
   const getRSVPs = db.prepare('SELECT * FROM rsvps WHERE event_id = @id');
-  const rsvps = getRSVPs.all({ id });
+  const rsvps = getRSVPs.all({ id }) as RSVP[];
   return { ...event, rsvps };
 }
 
-const getEvent = (eventId) => {
+const getEvent = (eventId:Id) => {
   const byId = db.prepare('SELECT * FROM events WHERE id = @eventId');
-  const event = byId.get({ eventId });
+  const event = byId.get({ eventId }) as Event;
   return joinHost(event);
 }
 
 router.get('/', (_req, res) => {
   const listEvents = db.prepare(`SELECT * FROM events`);
-  const events = listEvents.all();
+  const events = listEvents.all() as Event[];
   res.json(events.map(joinHost).map(joinRSVPs));
 });
 
@@ -32,7 +33,8 @@ const insertEvent = db.prepare(`INSERT INTO events VALUES (@id, @title, @descrip
 
 router.post('/new', (req, res) => {
   const data = req.body;
-  const { lastInsertRowid: id } = insertEvent.run(data);
+  const { lastInsertRowid } = insertEvent.run(data);
+  const id = lastInsertRowid as number;
   const event = getEvent(id);
   res.status(201).json(event);
 });

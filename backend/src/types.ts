@@ -1,5 +1,6 @@
-interface Event {
-    id: number;
+export type Id= number;
+export interface Event {
+    id: Id;
     title: string;
     description?: string;
     image_url?: string;
@@ -9,15 +10,16 @@ interface Event {
     rsvps: RSVP[];
 }
 
-interface User {
-    id: number;
+export interface User {
+    id: Id;
     name: string;
     email: string;
     avatar_url?: string;
 }
 
-interface RSVP {
-    id: number;
+export interface RSVP {
+    id: Id;
     name: string;
     email: string;
 } 
+
